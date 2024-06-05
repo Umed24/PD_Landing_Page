@@ -3,17 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
+    <title>Interactive Scrolling Page</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s ease;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: background-color 0.5s ease;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 80px 20px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
-    <section style="position: relative;background: red; height:750px ;">
-        feature 1
-    </section>
-    <section style="background: blue; height:750px ;"">
-        feature 2
-    </section>
-    <section style="background: green; height:750px ;"">
-        feature 3
-    </section>
+    <div class="navbar">
+        <h1>My Website</h1>
+        <nav>
+            <a href="#section1">Section 1</a>
+            <a href="#section2">Section 2</a>
+            <a href="#section3">Section 3</a>
+        </nav>
+    </div>
+    <div class="content">
+        <div id="section1" class="section">
+            <h2>Section 1</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vehicula, nunc id sollicitudin lacinia, massa turpis varius enim, non tincidunt est lorem non orci. Donec laoreet tincidunt justo, at posuere metus fermentum ut. Nulla facilisi. Phasellus venenatis vestibulum dui, vel facilisis nunc pulvinar a.</p>
+        </div>
+        <div id="section2" class="section">
+            <h2>Section 2</h2>
+            <p>Nullam vitae sapien nec libero condimentum dapibus. Vivamus non sagittis dolor. Proin fringilla enim ac sollicitudin convallis. Nulla bibendum sem metus, nec fermentum purus dapibus sit amet. Vivamus nec fermentum tortor. Donec ac posuere ex. Aliquam erat volutpat.</p>
+        </div>
+        <div id="section3" class="section">
+            <h2>Section 3</h2>
+            <p>Curabitur eget justo et erat tincidunt consequat. Sed dictum leo vel eros volutpat, id tincidunt tortor dignissim. Sed consectetur nulla a orci posuere, non facilisis mauris dapibus. Cras ac ullamcorper sapien, eget dignissim ligula. Aenean nec ultrices libero. Nulla facilisi.</p>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercentage = scrollPosition / documentHeight;
+
+            const red = Math.min(255, scrollPercentage * 2 * 255);
+            const green = Math.min(255, 255 - (scrollPercentage * 2 * 255));
+            const blue = 150;
+
+            document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+
+            // Change navbar background color based on scroll position
+            if (scrollPosition > 50) {
+                document.querySelector('.navbar').style.backgroundColor = `rgba(${red}, ${green}, ${blue}, 0.8)`;
+            } else {
+                document.querySelector('.navbar').style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+            }
+        });
+    </script>
 </body>
 </html>
